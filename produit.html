@@ -18,7 +18,7 @@
     <body>
         <header>
             <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
-                <a class="navbar-brand" href="#"><i class="fas fa-shopping-cart"></i>Orinoco</a>
+                <a class="navbar-brand" href="index.html"><i class="fas fa-shopping-cart"></i>Orinoco</a>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                     <span class="navbar-toggler-icon"></span>
@@ -27,7 +27,7 @@
                 <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Accueil</a>
+                            <a class="nav-link" href="index.html">Accueil</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Panier</a>
@@ -39,30 +39,26 @@
         </header>
 
         <main>
-            <h1>Ours en peluche faits à la main</h1>
-            <div class="row" id="test">
+            <div class="row" id="TEDIBER">
             </div>
-
             <script>
-                let getTeddies = new XMLHttpRequest();
+            let thatOneTeddy = "/" + location.search.slice(1).split("=")[1];
+            console.log(thatOneTeddy);
+
+            let getTeddies = new XMLHttpRequest();
                 getTeddies.onreadystatechange = function() {
                     if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
                         let response = JSON.parse(this.responseText);
                         console.log(response);
                         console.log(response.length);
-                        let tedContain = document.getElementById("test");
-
-                    for(i = 0; i < response.length; i++) {
-                    tedContain.innerHTML+='<div class="col-lg-4"><a class="" href="produit.html?id='+response[i]._id+'"><img class="img-fluid" src="'+response[i].imageUrl+'" alt="'+response[i].name+'"><p>'+response[i].name+'</p><button type="button" class="btn btn-outline-warning">Plus d\'informations</button></a></div>';
-                }
+                        let tedContain = document.getElementById("TEDIBER");
+                        tedContain.innerHTML+='<div class="col-lg-4"><a class="" href=""><img class="img-fluid" src="'+response.imageUrl+'" alt="'+response.name+'"><p>'+response.name+'</p><button type="button" class="btn btn-outline-warning">Plus d\'informations</button></a></div>';
+                    
     }
 };
-                getTeddies.open("GET", "https://jwdp5.herokuapp.com/api/teddies");
-                getTeddies.send();
+getTeddies.open('GET', 'https://jwdp5.herokuapp.com/api/teddies'+thatOneTeddy+'');
+getTeddies.send();
             </script>
-        </main>
 
-        <footer>
-        </footer>
+        </main>
     </body>
-</html>
