@@ -38,34 +38,3 @@
 
             </nav>
         </header>
-
-        <main>
-            <div class="row justify-content-center" id="TEDIBER">
-            </div>
-            <script>
-                let thatOneTeddy = "/" + location.search.slice(1).split("=")[1];
-                console.log(thatOneTeddy);
-
-                let getTeddies = new XMLHttpRequest();
-                    getTeddies.onreadystatechange = function() {
-                        if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-                            let response = JSON.parse(this.responseText);
-                            console.log(response);
-                            console.log(response.colors.length);
-                            let tedProduct = document.getElementById("TEDIBER");
-                            tedProduct.innerHTML+='<div class="col-lg-4"><img class="img-fluid" src="'+response.imageUrl+'" alt="'+response.name+'"><p>'+response.name+'</p><div class="form-group"><label for="exampleFormControlSelect1">Choisir la couleur :</label><select class="form-control" id="exampleFormControlSelect1"><option>Plusieurs couleurs disponibles</option></select></div><p>'+response.price+'</p><input type="number" value="0" min="1" max="1000" step="1"/><input placeholder="Enter a number" required type="number" value="" min="0" max="100"/> <button type="button" class="btn btn-outline-warning">Ajouter au panier</button></div>';
-
-                            let tedColor = document.getElementsByTagName("select")[0];
-                            for(i = 0; i < response.colors.length; i++) {
-                                tedColor.innerHTML+='<option>'+response.colors[i]+'</option>';
-
-                        }}
-                    };
-                getTeddies.open('GET', 'https://jwdp5.herokuapp.com/api/teddies'+thatOneTeddy+'');
-                getTeddies.send();
-
-
-            </script>
-
-        </main>
-    </body>
