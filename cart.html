@@ -31,7 +31,20 @@
                         </li>
                     </ul>
                 </div>
-                
-
-            </nav>
+                </nav>
         </header>
+
+        <main>
+            <div id="test"></div>
+        </main>
+
+        <script>
+            let x = localStorage.getItem("name");
+            document.getElementById("test").innerHTML= x ;
+
+            let y = localStorage.getItem("tedArray");
+            console.log('???', JSON.parse(y));
+        </script>
+
+        </body>
+    
