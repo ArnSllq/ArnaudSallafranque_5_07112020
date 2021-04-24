@@ -72,19 +72,17 @@
                                         "color" : tedColor,
                                         "quantity" : parseInt(tedNumber)
                                     };
-                                    let monBoTab = [localStorage.getItem("tedArray")];
-                                    console.log(monBoTab);
-
-                                    localStorage.setItem("tedArray", JSON.stringify(tedStore));
-                                    // localStorage.setItem("tedArray", tedStore);
-
 
                                     if (localStorage.length > 0) {
+                                        let monBoTab = [JSON.parse(localStorage.getItem("tedArray"))];
                                         monBoTab.push(tedStore);
                                         localStorage.setItem("tedArray", JSON.stringify(monBoTab));   
-                                        // localStorage.setItem("tedArray", monBoTab);                           
-                        
-                                    }
+                                        // localStorage.setItem("tedArray", monBoTab);    
+                                        console.log(monBoTab);
+                                    } else {
+                                        let myFirstItem = localStorage.setItem("tedArray", JSON.stringify(tedStore));
+                                        console.log(localStorage);
+                                    };
                                 };
 
                                 document.getElementById("Teddies-cart").addEventListener("click", tedInTheCart);
