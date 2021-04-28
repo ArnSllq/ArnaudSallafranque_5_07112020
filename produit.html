@@ -74,14 +74,14 @@
                                     };
 
                                     if (localStorage.length > 0) {
-                                        let monBoTab = [JSON.parse(localStorage.getItem("tedArray"))];
+                                        let monBoTab = JSON.parse(localStorage.getItem("tedArray")) ?? [];
                                         monBoTab.push(tedStore);
                                         localStorage.setItem("tedArray", JSON.stringify(monBoTab));   
                                         // localStorage.setItem("tedArray", monBoTab);    
                                         console.log(monBoTab);
                                     } else {
-                                        let myFirstItem = localStorage.setItem("tedArray", JSON.stringify(tedStore));
-                                        console.log(localStorage);
+                                        let myFirstItem = JSON.stringify([tedStore]);
+                                        localStorage.setItem("tedArray", myFirstItem);
                                     };
                                 };
 

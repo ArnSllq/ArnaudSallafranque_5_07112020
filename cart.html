@@ -35,13 +35,41 @@
         </header>
 
         <main>
-            <div id="test"></div>
+            <div class="row justify-content-center" id="cart-store">
+            
+            </div>
+            <form id="myForm">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" placeholder="customer@orinoco.com" id="email">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Adresse</span>
+                    </div>
+                    <input type="number" class="form-control" placeholder="3">
+                    <input type="text" class="form-control" placeholder="rue de France">
+                    <input type="text" class="form-control" placeholder="Bordeaux">
+                  </div>
+                <button type="submit" id="order-btn" class="btn btn-outline-success" onclick="teddiesOrder()">Commander</button>
+            </form>
         </main>
 
         <script>
             let getTheOrder = localStorage.getItem("tedArray");
+            let displayOrder = JSON.parse(getTheOrder);
             console.log(JSON.parse(getTheOrder));
 
+            let cartContent = document.getElementById("cart-store");
+            for(i = 0; i < displayOrder.length; i++) {
+                cartContent.innerHTML+='<div class="col-lg-4"><p>'+displayOrder[i].name+'</p><p>'+displayOrder[i].color+'</p><p>'+displayOrder[i].price+'</p><p>'+displayOrder[i].quantity+'</p></div>';
+            };
+
+            function teddiesOrder() {
+                let myForm = document.getElementById("myForm");
+                let formData = new FormData(myForm);
+                console.log(formData);
+            };
         </script>
 
         </body>
