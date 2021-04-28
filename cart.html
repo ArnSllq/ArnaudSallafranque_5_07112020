@@ -62,8 +62,14 @@
 
             let cartContent = document.getElementById("cart-store");
             for(i = 0; i < displayOrder.length; i++) {
-                cartContent.innerHTML+='<div class="col-lg-4"><p>'+displayOrder[i].name+'</p><p>'+displayOrder[i].color+'</p><p>'+displayOrder[i].price+'</p><p>'+displayOrder[i].quantity+'</p></div>';
+                cartContent.innerHTML+='<div class="col-lg-4" id="cart-content"><p>'+displayOrder[i].name+'</p><p>'+displayOrder[i].color+'</p><p>'+displayOrder[i].price+'</p><p>'+displayOrder[i].quantity+'</p></div>';
             };
+            let teddiesTotal = 0;
+            for(i = 0; i < displayOrder.length; i++) {
+                teddiesTotal += Number(displayOrder[i].total);
+                console.log(teddiesTotal);              
+            };
+            document.getElementById("cart-content").innerHTML+='<div><p>TOTAL</p>'+teddiesTotal+'</div>'
 
             function teddiesOrder() {
                 let myForm = document.getElementById("myForm");
