@@ -38,20 +38,18 @@
             <div class="row justify-content-center" id="cart-store">
             
             </div>
-            <form id="myForm">
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" placeholder="customer@orinoco.com" id="email">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">Adresse</span>
-                    </div>
-                    <input type="number" class="form-control" placeholder="3">
-                    <input type="text" class="form-control" placeholder="rue de France">
-                    <input type="text" class="form-control" placeholder="Bordeaux">
-                  </div>
-                <button type="submit" id="order-btn" class="btn btn-outline-success" onclick="teddiesOrder()">Commander</button>
+            <form id="Form">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" value="customer@orinoco.com" name="email" id="email">
+                <label for="Prénom" class="mr-sm-2">Prénom :</label>
+                <input type="text" class="form-control mb-2 mr-sm-2" value="Dupond" name="firstName" id="Prénom">
+                <label for="Nom" class="mr-sm-2">Nom :</label>
+                <input type="text" class="form-control mb-2 mr-sm-2" value="Dupont" name="lastName" id="Nom">
+                <label for="Adresse" class="mr-sm-2">Adresse :</label>
+                <input type="text" class="form-control" value="3 rue de" name="adress" id="Adresse">
+                <label for="Ville" class="mr-sm-2">Ville :</label>
+                <input type="text" class="form-control" value="Bordeaux" name="city" id="Ville">
+                <button type="submit" id="Order-button" class="btn btn-outline-success">Commander</button>
             </form>
         </main>
 
@@ -59,23 +57,45 @@
             let getTheOrder = localStorage.getItem("tedArray");
             let displayOrder = JSON.parse(getTheOrder);
             console.log(JSON.parse(getTheOrder));
+            let idProduct = displayOrder.map(item => item.id);
+            console.log(idProduct);
 
             let cartContent = document.getElementById("cart-store");
             for(i = 0; i < displayOrder.length; i++) {
                 cartContent.innerHTML+='<div class="col-lg-4" id="cart-content"><p>'+displayOrder[i].name+'</p><p>'+displayOrder[i].color+'</p><p>'+displayOrder[i].price+'</p><p>'+displayOrder[i].quantity+'</p></div>';
             };
             let teddiesTotal = 0;
+            let x = displayOrder[0].id;
             for(i = 0; i < displayOrder.length; i++) {
                 teddiesTotal += Number(displayOrder[i].total);
-                console.log(teddiesTotal);              
+                console.log(teddiesTotal);
             };
-            document.getElementById("cart-content").innerHTML+='<div><p>TOTAL</p>'+teddiesTotal+'</div>'
+
+            Form.onsubmit = async (e) => {
+                e.preventDefault();
+
+                let response = await fetch("https://jwdp5.herokuapp.com/api/teddies/order", {
+                    method: "POST",
+                    body: new FormData(Form), idProduct,
+                });
+
+                let result = await response.json();
+
+                alert(result.message);
+            };
+
+
+
+            document.getElementById("cart-content").innerHTML+='<div><p>TOTAL</p>'+teddiesTotal+' €</div>';
+
+
+
 
             function teddiesOrder() {
-                let myForm = document.getElementById("myForm");
-                let formData = new FormData(myForm);
-                console.log(formData);
+
             };
+
+            // document.getElementById("Order-button").addEventListener("click", teddiesOrder());
         </script>
 
         </body>
