@@ -73,10 +73,15 @@
 
             Form.onsubmit = async (e) => {
                 e.preventDefault();
+                let teddiesOrder = {
+                    "contact" : new FormData(Form),
+                    "product" : idProduct
+                };
+                console.log(JSON.stringify(teddiesOrder));
 
                 let response = await fetch("https://jwdp5.herokuapp.com/api/teddies/order", {
                     method: "POST",
-                    body: new FormData(Form), idProduct,
+                    body: JSON.stringify({teddiesOrdercontact: new FormData(Form)}),
                 });
 
                 let result = await response.json();
