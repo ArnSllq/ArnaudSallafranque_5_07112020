@@ -52,7 +52,7 @@
                                 console.log(response);
                                 console.log(response.colors.length);
                                 let tedProduct = document.getElementById("TEDIBER");
-                                tedProduct.innerHTML+='<div class="col-lg-4"><img class="img-fluid" src="'+response.imageUrl+'" alt="'+response.name+'"><p class="Teddies-name">'+response.name+'</p><div class="form-group"><label for="exampleFormControlSelect1">Choisir la couleur :</label><select class="form-control Teddies-color" id="exampleFormControlSelect1"><option>Plusieurs couleurs disponibles</option></select></div><p class="Teddies-price">'+response.price+'</p><input class="Teddies-number" type="number" value="0" min="1" max="1000" step="1"/><button type="button" class="btn btn-outline-warning" id="Teddies-cart">Ajouter au panier</button></div>';
+                                tedProduct.innerHTML+='<div class="col-lg-4"><img class="img-fluid" src="'+response.imageUrl+'" alt="'+response.name+'"><p class="Teddies-name">'+response.name+'</p><div class="form-group"><label for="exampleFormControlSelect1">Choisir la couleur :</label><select class="form-control Teddies-color" id="exampleFormControlSelect1"></select></div><p class="Teddies-price">'+response.price/100+' €</p><input class="Teddies-number" type="number" value="1" min="1" max="1000" step="1"/><button type="button" class="btn btn-outline-warning" id="Teddies-cart">Ajouter au panier</button></div>';
 
                                 let teddiesColor = document.getElementsByTagName("select")[0];
                                 let tedId = response._id;
@@ -63,7 +63,7 @@
                                 
                                 function tedInTheCart() {
                                     let tedName = document.getElementsByClassName("Teddies-name").innerHTML= response.name;
-                                    let tedPrice = document.getElementsByClassName("Teddies-price").innerHTML= response.price;
+                                    let tedPrice = document.getElementsByClassName("Teddies-price").innerHTML= response.price/100;
                                     let tedColor = document.getElementsByClassName("Teddies-color")[0].value;
                                     let tedNumber = document.getElementsByClassName("Teddies-number")[0].value;
 
@@ -103,3 +103,5 @@
 
         </main>
     </body>
+
+</html>

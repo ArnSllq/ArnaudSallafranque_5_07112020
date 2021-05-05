@@ -46,7 +46,7 @@
                 <label for="Nom" class="mr-sm-2">Nom :</label>
                 <input type="text" class="form-control mb-2 mr-sm-2" value="Dupont" name="lastName" id="Nom">
                 <label for="Adresse" class="mr-sm-2">Adresse :</label>
-                <input type="text" class="form-control" value="3 rue de" name="adress" id="Adresse">
+                <input type="text" class="form-control" value="3 rue de" name="address" id="Adresse">
                 <label for="Ville" class="mr-sm-2">Ville :</label>
                 <input type="text" class="form-control" value="Bordeaux" name="city" id="Ville">
                 <button type="submit" id="Order-button" class="btn btn-outline-success">Commander</button>
@@ -62,7 +62,7 @@
 
             let cartContent = document.getElementById("cart-store");
             for(i = 0; i < displayOrder.length; i++) {
-                cartContent.innerHTML+='<div class="col-lg-4" id="cart-content"><p>'+displayOrder[i].name+'</p><p>'+displayOrder[i].color+'</p><p>'+displayOrder[i].price+'</p><p>'+displayOrder[i].quantity+'</p></div>';
+                cartContent.innerHTML+='<div class="col-lg-4" id="cart-content"><p>'+displayOrder[i].name+'</p><p>'+displayOrder[i].color+'</p><p>'+displayOrder[i].price+' €</p><p>'+displayOrder[i].quantity+'</p></div>';
             };
             let teddiesTotal = 0;
             let x = displayOrder[0].id;
@@ -71,22 +71,31 @@
                 console.log(teddiesTotal);
             };
 
+
             Form.onsubmit = async (e) => {
                 e.preventDefault();
-                let teddiesOrder = {
-                    "contact" : new FormData(Form),
-                    "product" : idProduct
+                let x = new FormData(Form);
+                var object = {};
+                x.forEach((value, key) => object[key] = value);
+                var json = object;
+                let teddiesOrder = { 
+                    "contact" : json,
+                    "products" : idProduct
                 };
                 console.log(JSON.stringify(teddiesOrder));
 
                 let response = await fetch("https://jwdp5.herokuapp.com/api/teddies/order", {
                     method: "POST",
-                    body: JSON.stringify({teddiesOrdercontact: new FormData(Form)}),
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(teddiesOrder),
                 });
 
                 let result = await response.json();
-
-                alert(result.message);
+                console.log(result);
+                return window.location.replace('order.html?orderId='+result.orderId+'&total='+teddiesTotal+'')
             };
 
 
@@ -100,8 +109,8 @@
 
             };
 
-            // document.getElementById("Order-button").addEventListener("click", teddiesOrder());
         </script>
 
-        </body>
-    
+        </body>                   
+</html>
+            
