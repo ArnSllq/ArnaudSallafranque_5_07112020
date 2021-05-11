@@ -45,6 +45,7 @@ window.onload = () => {
                                     let myFirstItem = JSON.stringify([tedStore]);
                                     localStorage.setItem("tedArray", myFirstItem);
                                 };
+                                document.getElementById("Thank-you").innerHTML='<div class="alert alert-info" role="alert">'+tedName+' vous attend dans le <a href="cart.html" class="alert-link">panier</a>. Vous pouvez également <a href="index.html" class="alert-link">continuer votre visite</a>.';
                             };
                             // Déclenchement de la fonction au "click"
                             document.getElementById("Teddies-cart").addEventListener("click", tedInTheCart);

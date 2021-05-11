@@ -11,11 +11,11 @@ window.onload = () => {
         let teddiesTotal = 0;
         // Boucle permettant d'afficher le contenu du localStorage, ainsi que de calculer le total
         for(i = 0; i < displayOrder.length; i++) {
-            cartContent.innerHTML += '<div class="col-lg-4" id="cart-content"><p>'+displayOrder[i].name+'</p><p>'+displayOrder[i].color+'</p><p>'+displayOrder[i].price+' €</p><p>'+displayOrder[i].quantity+'</p></div>';
+            cartContent.innerHTML += '<div class="col-lg-4" id="cart-content"><p><strong>'+displayOrder[i].name+'</strong></p><p><strong>Coloris :</strong>'+displayOrder[i].color+'</p><p><strong>Prix :</strong>'+displayOrder[i].price+' €</p><p><strong>Quantité :</strong>'+displayOrder[i].quantity+'</p></div>';
             teddiesTotal += Number(displayOrder[i].total);
         };
         // Affichage du total sur la page
-        document.getElementById("cart-content").innerHTML+='<div><p>TOTAL</p>'+teddiesTotal+' €</div>';
+        document.getElementById("Tedtotal").innerHTML+='<div><p>TOTAL</p>'+teddiesTotal+' €</div>';
 
         // Envoie des données avec une requête de type POST après les avoir formaté au format attendu par l'API
         function sendingData() {
