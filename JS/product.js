@@ -35,7 +35,7 @@ window.onload = () => {
                                     "quantity" : parseInt(tedNumber),
                                     "total" : tedPrice * parseInt(tedNumber)
                                 };
-                                // Parti qui permet de la stockage dans le localStorage, la partie If, se déclenche s'il y a déjà un objet de stocker, 
+                                // Partie qui permet de la stockage dans le localStorage, la partie If, se déclenche s'il y a déjà un objet de stocker, 
                                 if (localStorage.length > 0) {
                                     let monBoTab = JSON.parse(localStorage.getItem("tedArray")) ?? [];
                                     monBoTab.push(tedStore);
