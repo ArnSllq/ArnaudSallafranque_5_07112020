@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>Orinoco</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="style.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/ab16bb9001.js" crossorigin="anonymous"></script>
+        <script src="JS/cart.js"></script>
+    </head>
+
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+                <a class="navbar-brand" href="index.html"><i class="fas fa-shopping-cart"></i>Orinoco</a>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Accueil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="cart.html">Panier</a>
+                        </li>
+                    </ul>
+                </div>
+                </nav>
+        </header>
+
+        <main>
+            <div class="row " id="cartstore">
+            </div>
+            <div class="row" id="Tedtotal">
+            </div>
+            <form id="Form" class="formu">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" placeholder="customer@orinoco.com" name="email" id="email" required>
+                <label for="Prénom" class="mr-sm-2">Prénom :</label>
+                <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Dupond" name="firstName" id="Prénom" required>
+                <label for="Nom" class="mr-sm-2">Nom :</label>
+                <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Dupont" name="lastName" id="Nom" required>
+                <label for="Adresse" class="mr-sm-2">Adresse :</label>
+                <input type="text" class="form-control" placeholder="3 rue de" name="address" id="Adresse" required>
+                <label for="Ville" class="mr-sm-2">Ville :</label>
+                <input type="text" class="form-control" placeholder="Bordeaux" name="city" id="Ville" required>
+                <button type="submit" id="Order-button" class="btn btn-outline-success">Commander</button>
+            </form>
+        </main>
+    </body>
+</html>
