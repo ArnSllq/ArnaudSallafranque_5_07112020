@@ -11,7 +11,7 @@ window.onload = () => {
                         if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
                             let response = JSON.parse(this.responseText);
                             //  Affichage de la fiche produit
-                            tedProduct.innerHTML+='<div class="col-lg-4"><img class="img-fluid" src="'+response.imageUrl+'" alt="'+response.name+'"><p class="Teddies-name">'+response.name+'</p><div class="form-group"><label for="exampleFormControlSelect1">Choisir la couleur :</label><select class="form-control Teddies-color" id="exampleFormControlSelect1"></select></div><p class="Teddies-price">'+response.price/100+' €</p><input class="Teddies-number" type="number" value="1" min="1" max="1000" step="1"/><button type="button" class="btn btn-outline-warning" id="Teddies-cart">Ajouter au panier</button></div>';
+                            tedProduct.innerHTML+='<div class="col-lg-4"><img class="img-fluid" src="'+response.imageUrl+'" alt="'+response.name+'"><p class="Teddies-name">'+response.name+'</p><p>'+response.description+'</p><div class="form-group"><label for="exampleFormControlSelect1">Choisir la couleur :</label><select class="form-control Teddies-color" id="exampleFormControlSelect1"></select></div><p class="Teddies-price">'+response.price/100+' €</p><input class="Teddies-number" type="number" value="1" min="1" max="1000" step="1"/><button type="button" class="btn btn-outline-warning" id="Teddies-cart">Ajouter au panier</button></div>';
                             // Variable permettant plus tard d'accéder au DOM pour accéder aux couleurs
                             let teddiesColor = document.getElementsByTagName("select")[0];
                             // Variable contenant l'id du produit qui sera stocker plus tard dans le localStorage
@@ -32,14 +32,23 @@ window.onload = () => {
                                     "name" : tedName,
                                     "price" : tedPrice,
                                     "color" : tedColor,
-                                    "quantity" : parseInt(tedNumber),
-                                    "total" : tedPrice * parseInt(tedNumber)
+                                    "quantity" : parseInt(tedNumber)
                                 };
                                 // Partie qui permet de la stockage dans le localStorage, la partie If, se déclenche s'il y a déjà un objet de stocker, 
                                 if (localStorage.length > 0) {
                                     let monBoTab = JSON.parse(localStorage.getItem("tedArray")) ?? [];
-                                    monBoTab.push(tedStore);
-                                    localStorage.setItem("tedArray", JSON.stringify(monBoTab));
+                                        for(i = 0; i < monBoTab.length; i++) {
+                                            if(monBoTab[i].id === tedStore.id && monBoTab[i].color === tedStore.color) {
+                                                monBoTab[i].quantity+=tedStore.quantity;
+                                                localStorage.setItem("tedArray", JSON.stringify(monBoTab));
+                                                return; 
+                                            }                                      
+                                        }
+                                        monBoTab.push(tedStore);
+                                        localStorage.setItem("tedArray", JSON.stringify(monBoTab));
+
+
+
                                     // sinon c'est cette partie qui se déclenche, pour stocker le première objet sous forme de tableau   
                                 } else {
                                     let myFirstItem = JSON.stringify([tedStore]);
@@ -51,8 +60,8 @@ window.onload = () => {
                             document.getElementById("Teddies-cart").addEventListener("click", tedInTheCart);
                         }
                     }
-                // getTeddies.open('GET', 'https://jwdp5.herokuapp.com/api/teddies'+thatOneTeddy+'');
-                getTeddies.open('GET', 'http://localhost:3000/api/teddies'+thatOneTeddy+'');
+                getTeddies.open('GET', 'https://jwdp5.herokuapp.com/api/teddies'+thatOneTeddy+'');
+                // getTeddies.open('GET', 'http://localhost:3000/api/teddies'+thatOneTeddy+'');
                 getTeddies.send();
             } catch {
                 tedProduct.innerHTML='<h1>Can\'t get load informations</h1>'
