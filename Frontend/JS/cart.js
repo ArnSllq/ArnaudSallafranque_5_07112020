@@ -61,39 +61,42 @@ window.onload = () => {
         };
         // Affichage du total sur la page
         document.getElementById("Tedtotal").innerHTML='<div><p>TOTAL : <br>'+teddiesTotal+' €</p></div>';
-        // if(teddiesTotal === 0) {
 
-        // }
 
         // Envoie des données avec une requête de type POST après les avoir formaté au format attendu par l'API
         function sendingData() {
-            document.getElementById('Form').onsubmit = async (e) => {
-                e.preventDefault();
-                let sendingForm = new FormData(Form);
-                var object = {};
-                sendingForm.forEach((value, key) => object[key] = value);
-                var json = object;
-                // Objet contenant les informations à transmettre, les informations contenues dans le formulaire et les ID des produits
-                let teddiesOrder = { 
-                    "contact" : json,
-                    "products" : idProducts
-                };
-                // Requête type POST
-                let response = await fetch("https://jwdp5.herokuapp.com/api/teddies/order", {
-                // let response = await fetch("http://localhost:3000/api/teddies/order", {
-                    method: "POST",
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    // Envoi de l'objet contenant les données
-                    body: JSON.stringify(teddiesOrder),
-                });
+            if(teddiesTotal === 0) {
+                alert("Votre panier semble vide, merci d'ajouter un ours pour pouvoir continuer")
+            } else {   
+                document.getElementById('Form').onsubmit = async (e) => {
+                    e.preventDefault();
+                    let sendingForm = new FormData(Form);
+                    var object = {};
+                    sendingForm.forEach((value, key) => object[key] = value);
+                    var json = object;
+                    // Objet contenant les informations à transmettre, les informations contenues dans le formulaire et les ID des produits
+                    let teddiesOrder = { 
+                        "contact" : json,
+                        "products" : idProducts
+                    };
+                    // Requête type POST
+                    let response = await fetch("https://jwdp5.herokuapp.com/api/teddies/order", {
+                    // let response = await fetch("http://localhost:3000/api/teddies/order", {
+                        method: "POST",
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        // Envoi de l'objet contenant les données
+                        body: JSON.stringify(teddiesOrder),
+                    });
 
-                let result = await response.json();
-                // Envoi de l'id unique de la commande et le total dans l'URL et redirection vers la page de confirmation de commande "order.html"
-                return window.location.replace('order.html?orderId='+result.orderId+'&total='+teddiesTotal+'')
-            };
+                    let result = await response.json();
+                    // Envoi de l'id unique de la commande et le total dans l'URL et redirection vers la page de confirmation de commande "order.html"
+                    return window.location.replace('order.html?orderId='+result.orderId+'&total='+teddiesTotal+'')
+                };
+            }
+
         };
         sendingData();
 
