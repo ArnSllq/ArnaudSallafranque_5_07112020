@@ -39,16 +39,13 @@ window.onload = () => {
                                     let monBoTab = JSON.parse(localStorage.getItem("tedArray")) ?? [];
                                         for(i = 0; i < monBoTab.length; i++) {
                                             if(monBoTab[i].id === tedStore.id && monBoTab[i].color === tedStore.color) {
-                                                monBoTab[i].quantity+=tedStore.quantity;
+                                                monBoTab[i].quantity += tedStore.quantity;
                                                 localStorage.setItem("tedArray", JSON.stringify(monBoTab));
                                                 return; 
                                             }                                      
                                         }
                                         monBoTab.push(tedStore);
                                         localStorage.setItem("tedArray", JSON.stringify(monBoTab));
-
-
-
                                     // sinon c'est cette partie qui se déclenche, pour stocker le première objet sous forme de tableau   
                                 } else {
                                     let myFirstItem = JSON.stringify([tedStore]);
