@@ -16,8 +16,8 @@ window.onload = () => {
                 }
             };
             // Appel type "GET"
-            getTeddies.open("GET", "https://jwdp5.herokuapp.com/api/teddies");
-            // getTeddies.open("GET", "http://localhost:3000/api/teddies");
+            // getTeddies.open("GET", "https://jwdp5.herokuapp.com/api/teddies");
+            getTeddies.open("GET", "http://localhost:3000/api/teddies");
             getTeddies.send();
         } catch {
             tedContain.innerHTML+= '<p>nothing to see here</p>';

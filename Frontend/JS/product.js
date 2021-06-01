@@ -57,8 +57,8 @@ window.onload = () => {
                             document.getElementById("Teddies-cart").addEventListener("click", tedInTheCart);
                         }
                     }
-                getTeddies.open('GET', 'https://jwdp5.herokuapp.com/api/teddies'+thatOneTeddy+'');
-                // getTeddies.open('GET', 'http://localhost:3000/api/teddies'+thatOneTeddy+'');
+                // getTeddies.open('GET', 'https://jwdp5.herokuapp.com/api/teddies'+thatOneTeddy+'');
+                getTeddies.open('GET', 'http://localhost:3000/api/teddies'+thatOneTeddy+'');
                 getTeddies.send();
             } catch {
                 tedProduct.innerHTML='<h1>Can\'t get load informations</h1>'

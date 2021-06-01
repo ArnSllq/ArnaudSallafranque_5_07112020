@@ -80,8 +80,8 @@ window.onload = () => {
                         "products" : idProducts
                     };
                     // Requête type POST
-                    let response = await fetch("https://jwdp5.herokuapp.com/api/teddies/order", {
-                    // let response = await fetch("http://localhost:3000/api/teddies/order", {
+                    // let response = await fetch("https://jwdp5.herokuapp.com/api/teddies/order", {
+                    let response = await fetch("http://localhost:3000/api/teddies/order", {
                         method: "POST",
                         headers: {
                             'Accept': 'application/json',
